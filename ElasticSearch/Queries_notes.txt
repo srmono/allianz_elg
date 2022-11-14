@@ -1,0 +1,93 @@
+# Download DataSet
+https://www.kaggle.com/datasets/rmisra/news-category-dataset 
+
+https://www.kaggle.com/datasets/rmisra/news-category-dataset/versions/2 
+https://www.kaggle.com/datasets/rmisra/news-category-dataset/versions/2 
+
+# Open Elasticsearch Query window
+
+https://www.restapitutorial.com/httpstatuscodes.html 
+
+Kibana -> 
+
+# Basic Crud operations
+
+Syntax:
+  GET _API/parameter 
+
+  GET _cluster/health
+
+# Get info about nodes in _cluster
+
+GET _nodes/stats
+
+---------------------
+
+Create an index
+
+  PUT name_of_the_index
+
+ex:-
+
+PUT favorite_candy
+
+Index a document 
+POST 
+
+Syntax:
+
+POST name_of_the_index/_doc 
+{
+  "filed": "value"
+}
+
+POST favorite_candy/_doc
+{
+  "first_name": "venkat",
+  "candy": "Sour Skittles"
+}
+
+
+
+PUT favorite_candy/_doc/1
+{
+  "first_name": "ravi",
+  "candy": "Sweet Skittles"
+}
+
+-----------------
+
+GET _cluster/health
+
+GET _nodes/stats
+
+PUT favorite_candy
+
+POST favorite_candy/_doc 
+{
+  "first_name": "venkat",
+  "candy": "Sour Skittles"
+}
+
+PUT favorite_candy/_doc/1
+{
+  "first_name": "ravi",
+  "candy": "sour Skittles"
+}
+
+PUT favorite_candy/_create/3
+{
+  "first_name": "muskan",
+  "candy": "Sweet"
+}
+
+GET favorite_candy/_doc/1
+
+POST favorite_candy/_update/1
+{
+  "doc": {
+    "candy": "Sweet Skitties"
+  }
+}
+
+-------------------------------

@@ -1,0 +1,52 @@
+# Setup guide
+https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html
+
+# Free Cloud Trial:
+https://www.elastic.co/cloud/cloud-trial-overview/30-days?ultron=community-beginners-crash-course-May2022+&hulk=30d 
+
+
+# Windows Installation: 
+https://dev.to/elastic/downloading-elasticsearch-and-kibana-macos-linux-and-windows-1mmo 
+
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-windows.html 
+
+
+
+# Installation on Linux and Mac:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html  
+
+
+# Alternative installation using Docker:
+Refer "docker-compose.yml" file
+
+docker-compose up -d
+
+--------------------------
+
+# Change config
+
+config/elasticsearch.yml 
+
+---------------------
+# Start Elasticsearch / Kibana
+
+bin/elasticsearch (or on windows: bin/elasticsearch.bat)
+
+bin/kibana (or on windows: bin/kibana.bat)
+
+--------------------------------------
+# After successful launch access elasticsearch and kibana
+
+# Elasticsearch
+curl http://loclahost:9200
+or
+from browser search for  http://loclahost:9200
+
+# Kibana
+curl http://loclahost:5601
+or
+from browser search for  http://loclahost:5601
+---------------------------------------------
+
+

@@ -1,0 +1,16 @@
+{
+    "name": "Venkat",
+    "exp": 18,
+    "skills": ["Frontend", "Backend"],
+    "other": [
+        {},
+        {}
+    ],
+    "address": {
+        "city": "bangalore",
+        "geo": {
+            "lat": "",
+            "lan":""
+        }
+    }
+}
