@@ -1,0 +1,381 @@
+Getting information about cluster and nodes
+# Syntax:
+GET _API/parameter
+
+# Get info about cluster health
+GET _cluster/health
+
+# Get info about nodes in a cluster
+GET _nodes/stats
+
+
+## Create an index
+# Syntax:
+PUT Name-of-the-Index
+
+# Example:
+
+PUT favorite_candy
+
+## Index a document
+# When indexing a document, both HTTP verbs POST or PUT can be used.
+
+# Use POST when you want Elasticsearch to autogenerate an id for your document.
+# Syntax:
+
+POST Name-of-the-Index/_doc
+{
+  "field": "value"
+}
+
+# Example:
+
+POST favorite_candy/_doc
+{
+  "first_name": "Lisa",
+  "candy": "Sour Skittles"
+}
+
+
+# Use PUT when you want to assign a specific id to your document (i.e. if your document has a natural identifier - purchase order number, patient id, & etc). 
+
+# Syntax:
+
+PUT Name-of-the-Index/_doc/id-you-want-to-assign-to-this-document
+{
+  "field": "value"
+}
+
+# Example:
+
+PUT favorite_candy/_doc/1
+{
+  "first_name": "John",
+  "candy": "Starburst"
+}
+
+# _create Endpoint
+# When you index a document using an id that already exists, the existing document is overwritten by the new document. If you do not want a existing document to be overwritten, you can use the _create endpoint!
+
+# With the _create Endpoint, no indexing will occur and you will get a 409 error message.
+
+# Syntax:
+
+PUT Name-of-the-Index/_create/id-you-want-to-assign-to-this-document
+{
+  "field": "value"
+}
+
+# Example:
+
+PUT favorite_candy/_create/1
+{
+  "first_name": "Finn",
+  "candy": "Jolly Ranchers"
+}
+
+
+# R - READ
+# Read a document
+# Syntax:
+
+GET Name-of-the-Index/_doc/id-of-the-document-you-want-to-retrieve
+
+# Example:
+
+GET favorite_candy/_doc/1
+
+# U - UPDATE
+# Update a document
+# If you want to update fields in a document, use the following syntax:
+
+POST Name-of-the-Index/_update/id-of-the-document-you-want-to-update
+{
+  "doc": {
+    "field1": "value",
+    "field2": "value",
+  }
+} 
+
+# Example:
+
+POST favorite_candy/_update/1
+{
+  "doc": {
+    "candy": "M&M's"
+  }
+}
+
+# D- DELETE
+# Delete a document
+# Syntax:
+
+DELETE Name-of-the-Index/_doc/id-of-the-document-you-want-to-delete
+
+# Example:
+
+DELETE favorite_candy/_doc/1
+
+
+---------------------------
+
+# Take Home Assignment
+- Create an index called destinations.
+- Pick five dream travel destinations. For each destination, index a document containing the name and the country.
+- Read(GET) each document to check the content of the document.
+- Update a field of a document.
+- Read(GET) the updated document to ensure that the field has been updated.
+- Delete a document of one place.
+- Copy and paste the following request to return all documents from the destinations index. This   is a great way to check whether all the CRUD operations you have performed thus far have worked!
+
+GET destinations/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+-------------------------------------------------------------------------
+
+# Use News category Dataset
+https://www.kaggle.com/rmisra/news-category-dataset 
+
+# Search for information
+# There are two main ways to search in Elasticsearch:
+- Queries
+- Aggregations
+
+# Queries
+# Queries retrieve documents that match the criteria.
+
+# Retrieve information about documents in an index
+# Syntax:
+GET enter_name_of_the_index_here/_search
+
+# Example:
+GET news_headlines/_search
+
+----
+# Get the exact total number of hits
+# To improve the response speed on large datasets, Elasticsearch limits the total count to 10,000 by default. If you want the exact total number of hits, use the following query.
+
+# Syntax:
+
+GET enter_name_of_the_index_here/_search
+{
+  "track_total_hits": true
+}
+
+# Example:
+
+GET news_headlines/_search
+{
+  "track_total_hits": true
+}
+
+---
+# Search for data within a specific time range
+# Syntax:
+
+GET enter_name_of_the_index_here/_search
+{
+  "query": {
+    "Specify the type of query here": {
+      "Enter name of the field here": {
+        "gte": "Enter lowest value of the range here",
+        "lte": "Enter highest value of the range here"
+      }
+    }
+  }
+}
+
+# Example:
+
+GET news_headlines/_search
+{
+  "query": {
+    "range": {
+      "date": {
+        "gte": "2015-06-20",
+        "lte": "2015-09-22"
+      }
+    }
+  }
+}
+
+---
+# Aggregations
+# An aggregation summarizes your data as metrics, statistics, and other analytics.
+
+# Analyze the data to show the categories of news headlines in our dataset
+# Syntax:
+
+GET enter_name_of_the_index_here/_search
+{
+  "aggs": {
+    "name your aggregation here": {
+      "specify aggregation type here": {
+        "field": "name the field you want to aggregate here",
+        "size": state how many buckets you want returned here
+      }
+    }
+  }
+}
+
+# Example:
+
+GET news_headlines/_search
+{
+  "aggs": {
+    "by_category": {
+      "terms": {
+        "field": "category",
+        "size": 100
+      }
+    }
+  }
+}
+
+---
+# A combination of query and aggregation request
+# Search for the most significant term in a category
+# Syntax:
+
+GET enter_name_of_the_index_here/_search
+{
+  "query": {
+    "match": {
+      "Enter the name of the field": "Enter the value you are looking for"
+    }
+  },
+  "aggregations": {
+    "Name your aggregation here": {
+      "significant_text": {
+        "field": "Enter the name of the field you are searching for"
+      }
+    }
+  }
+}
+
+# Example:
+
+GET news_headlines/_search
+{
+  "query": {
+    "match": {
+      "category": "ENTERTAINMENT"
+    }
+  },
+  "aggregations": {
+    "popular_in_entertainment": {
+      "significant_text": {
+        "field": "headline"
+      }
+    }
+  }
+}
+
+
+-----
+# Precision and Recall
+# Increasing Recall
+# Syntax:
+
+GET enter_name_of_index_here/_search
+{
+  "query": {
+    "match": {
+      "Specify the field you want to search": {
+        "query": "Enter search terms"
+      }
+    }
+  }
+}
+
+# Example:
+
+GET news_headlines/_search
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "Khloe Kardashian Kendall Jenner"
+      }
+    }
+  }
+}
+###
+By default, the match query uses an "OR" logic. If a document contains one of the search terms, Elasticsearch will consider that document as a hit.
+
+"OR" logic results in higher number of hits, thereby increasing recall. However, the hits are loosely related to the query and lowering precision as a result.
+###
+
+# Increasing Precision
+We can increase precision by adding an "and" operator to the query.
+
+# Syntax:
+
+GET enter_name_of_index_here/_search
+{
+  "query": {
+    "match": {
+      "Specify the field you want to search": {
+        "query": "Enter search terms",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+# Example:
+
+GET news_headlines/_search
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "Khloe Kardashian Kendall Jenner",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+###
+"AND" operator will result in getting more precise matches, thereby increasing precision. However, it will reduce the number of hits returned, resulting in lower recall.
+###
+
+# minimum_should_match
+# This parameter allows you to specify the minimum number of terms a document should have to be included in the search results.
+
+# This parameter gives you more control over fine tuning precision and recall of your search.
+
+# Syntax:
+
+GET enter_name_of_index_here/_search
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "Enter search term here",
+        "minimum_should_match": Enter a number here
+      }
+    }
+  }
+}
+
+# Example:
+
+GET news_headlines/_search
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "Khloe Kardashian Kendall Jenner",
+        "minimum_should_match": 3
+      }
+    }
+  }
+}
+
+

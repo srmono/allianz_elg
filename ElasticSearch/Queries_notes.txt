@@ -91,3 +91,83 @@ POST favorite_candy/_update/1
 }
 
 -------------------------------
+
+
+GET accounts/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "lastname": "Smith"
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "age": "32"
+    }
+  }
+}
+
+
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "address": "Hart Place"
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "term": {
+      "firstname": {
+        "value": "huff"
+      }
+    }
+  }
+}
+
+
+GET accounts/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "Guilford",
+      "fields": ["firstname", "city"]
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "match_phrase": {
+      "phrase": {
+        "query": "Street"
+      }
+    }
+  }
+}
+GET accounts/_search
+{
+  "query": {
+    "wildcard": {
+      "firstname": {
+        "value": "H*ie"
+      }
+    }
+  }
+}
+
