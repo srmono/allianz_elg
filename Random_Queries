@@ -1,0 +1,250 @@
+GET kibana_sample_data_ecommerce/_search
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "customer_gender": "MALE"
+          }
+        },
+        {
+          "term": {
+            "geoip.continent_name": "North America"
+          }
+        }
+      ]
+    }
+  }
+}
+
+GET _cluster/health
+
+GET _nodes/stats
+
+PUT favorite_candy
+
+POST favorite_candy/_doc 
+{
+  "first_name": "venkat",
+  "candy": "Sour Skittles"
+}
+
+PUT favorite_candy/_doc/1
+{
+  "first_name": "ravi",
+  "candy": "sour Skittles"
+}
+
+PUT favorite_candy/_create/3
+{
+  "first_name": "muskan",
+  "candy": "Sweet"
+}
+
+GET favorite_candy/_doc/1
+
+POST favorite_candy/_update/1
+{
+  "doc": {
+    "candy": "Sweet Skitties"
+  }
+}
+
+
+
+
+GET accounts/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "lastname": "Smith"
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "age": "32"
+    }
+  }
+}
+
+
+GET accounts/_search
+{
+  "query": {
+    "match": {
+      "address": "Hart Place"
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "term": {
+      "firstname": {
+        "value": "huff"
+      }
+    }
+  }
+}
+
+
+GET accounts/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "Guilford",
+      "fields": ["firstname", "city"]
+    }
+  }
+}
+
+GET accounts/_search
+{
+  "query": {
+    "match_phrase": {
+      "phrase": {
+        "query": "Street"
+      }
+    }
+  }
+}
+GET accounts/_search
+{
+  "query": {
+    "wildcard": {
+      "firstname": {
+        "value": "H*ie"
+      }
+    }
+  }
+}
+
+
+GET /accounts/_search
+{
+  "query": {
+    "match": {
+      "address": "street"
+    }
+  }
+}
+
+
+GET /accounts/_search
+{
+  "query": {
+    "boosting": {
+      "positive": {
+        "term": {
+          "address": "Street"
+        }
+      },
+      "negative": {
+        "term": {
+          "address": "Bristol"
+        }
+      },
+      "negative_boost": 0.2
+    }
+  }
+}
+
+
+
+
+GET news_headlines/_search
+
+GET news_headlines/_search
+{
+  "track_total_hits": true
+}
+
+
+GET news_headlines/_search
+{
+  "query": {
+    "range": {
+      "date": {
+        "gte": "2015-06-20",
+        "lte": "2015-09-22"
+      }
+    }
+  }
+}
+
+GET news_headlines/_search
+{
+  "aggs": {
+    "by_category": {
+      "terms": {
+        "field": "category",
+        "size": 100
+      }
+    }
+  }
+}
+
+GET news_headlines/_search
+{
+  "query": {
+    "match": {
+      "category": "ENVIRONMENT"
+    }
+  },
+  "aggs": {
+    "popular_in_entertainment": {
+      "significant_text": {
+        "field": "headline"
+      }
+    }
+  }
+}
+
+GET news_headlines/_search
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "Khloe Kardashian Kendall Jenner",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+GET news_headlines/_search
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "Khloe Kardashian Kendall Jenner",
+        "minimum_should_match": 3
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+

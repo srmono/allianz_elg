@@ -15,8 +15,35 @@ var person = {
     }
 }
 
+console.log(person.name) 
+console.log(
+    person.address.geo
+)
+
 //js object to json (stringified)
 
 JSON.stringify(person)
 
 //DATA  -->  DSL -> JSON
+
+
+//POST /ftq_accounts/_search
+var x = {
+  "query": {
+    "intervals": {
+      "address": { 
+        "match": {
+            "query":"171 Avenue",
+            "max_gaps": 10,
+            "filter": {
+                "not_containing": {
+                    "match": {
+                        "query": "salty"
+                    }
+                }
+            }
+        }
+       }
+    }
+  }
+}

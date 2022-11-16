@@ -1,0 +1,118 @@
+---
+# Starting first event
+
+.\bin\logstash.bat -e "input { stdin{} } output { stdout{} }"
+
+{
+    "message" => "I am great\r",
+    "@timestamp" => 2022-11-16T05:55:56.702Z,
+    "@version" => "1",
+    "host" => "DESKTOP-2QS39LV"
+}
+
+linux output may be:- I am great
+
+# Run even from config file
+.\bin\logstash.bat -f "file_path"
+
+input {
+    stdin {
+
+    }
+}
+
+output {
+    stdout {
+       
+    }
+}
+
+
+# output codec 
+
+input {
+    stdin {
+
+    }
+}
+
+output {
+    stdout {
+        codec => rubydebug
+    }
+}
+
+
+------------------
+## Handle Json input 
+
+input {
+    stdin {
+        codec => json
+    }
+}
+
+output {
+    stdout {
+        codec => rubydebug
+    }
+}
+
+-------------------
+
+### Outputting the events
+
+input {
+    stdin {
+        codec => json
+    }
+}
+
+output {
+    stdout {
+        codec => rubydebug
+    }
+
+    file {
+        path => "output.txt"
+    }
+}
+
+
+-----------------------
+
+### Handling data from Http (http input)
+
+
+input {
+    stdin {
+        codec => json
+    }
+
+    http {
+        host => "127.0.0.1"
+        port => 5000
+    }
+}
+
+output {
+    stdout {
+        codec => rubydebug
+    }
+
+    file {
+        path => "output.txt"
+    }
+}
+
+
+curl -XPUT -H "Content-Type: application/json" -d '{"amount": 9, "quantity": 3}' http://localhost:5000
+----------------------
+
+
+option          purpose
+
+add_field       add one or more fields to the even 
+remove_filed    remove one or more fields to the even 
+add_tag 
+remove_tag 
