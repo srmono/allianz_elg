@@ -116,3 +116,7 @@ add_field       add one or more fields to the even
 remove_filed    remove one or more fields to the even 
 add_tag 
 remove_tag 
+
+-----------------------
+
+.\bin\logstash.bat -f C:\logstash-7.12.1\config\pipelines\pipeline_apache.conf --config.reload.automatic

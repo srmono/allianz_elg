@@ -1,0 +1,28 @@
+184.252.108.229 - - [20/Sep/2017:13:22:22 +0200] "GET /products/view/123 HTTP/1.1" 200 12798 "https://myweb.com/products" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"
+
+184.252.108.229 
+- - 
+[20/Sep/2017:13:22:22 +0200]
+ "GET
+  /products/view/123 HTTP/1.1
+  " 
+  200 
+  12798 
+  "https://myweb.com/products" 
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"
+
+{
+    "ip": 184.252.108.229 ,
+    "time_of_log":20/Sep/2017:13:22:22 +0200,
+    "method": "GET",
+    "api_endpoint": /products/view/123 HTTP/1.1,
+    "http_response": 200,
+    "url":"https://myweb.com/products",
+    "agent_text": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"
+}
+
+GROK _
+
+Jhon                    doe                 john@doe.com         32
+
+%{WORD:firstNmae}      %{WORD:last_name}   %{EMIL_ADDRESS:email} %{INT:age:int}
