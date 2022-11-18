@@ -120,3 +120,10 @@ remove_tag
 -----------------------
 
 .\bin\logstash.bat -f C:\logstash-7.12.1\config\pipelines\pipeline_apache.conf --config.reload.automatic
+
+
+## running multiple pipelines
+
+Update configurations on pipeline.yml
+
+.\bin\logstash.bat  --config.reload.automatic

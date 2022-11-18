@@ -1,0 +1,44 @@
+sudo systemctl daemon-reload
+sudo systemctl start grafana-server
+sudo systemctl status grafana-server
+
+Configure the Grafana server to start at boot:
+    sudo systemctl enable grafana-server.service
+
+sudo service grafana-server start
+sudo service grafana-server status
+
+# Monitoring K8s cluster pods 
+
+docker --version
+minikube version 
+kubectl version 
+helm version 
+
+----------------------------
+- add helm repository 
+    helm repo add bitnami https://charts.bitnami.com/bitnami
+
+- update helm repo 
+    helm repo update 
+
+- start minikube (k8s cluster)
+    minikube start 
+
+- install prometheus k8s cluster with helm chart 
+    helm install prometheus bitnami/kube-prometheus
+
+# Create dashaboard from Prometheus data source added above
+
+# Delete helm chart
+
+helm delete prometheus
+
+minikube stop 
+
+
+# mysql -> prom... -> garfana
+
+
+
+
